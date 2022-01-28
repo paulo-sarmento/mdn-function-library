@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Function library example</title>
+  <style>
+    input {
+      font-size: 2em;
+      margin: 10px 1px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <input class="numberInput" type="text">
+
+  <script>
+    const input = document.querySelector('.numberInput');
+    const para = document.querySelector('p');
+    const body = document.querySelector('body')
+
+    function squared(num) {
+        return `${num} squared is ${num * num}. `;
+    }
+
+    function cubed(num) {
+        return `${num} cubed is ${num * num * num}. `;
+    }
+
+    function factorial(num) {
+        if (num < 0) return undefined;
+        if (num == 0) return 1;
+        let y = num;
+        let x = y - 1;
+        while (x > 1) {
+            y *= x;
+            x--;
+        }
+        return `${num} factorial is ${y}. `;
+    }
+
+    function squaredRoot(num) {
+        if (num < 0) return undefined;
+        if (num == 0) return 0;
+        return `${num} squared root is ${Math.sqrt(num)}.`;
+    }
+
+    function cubicRoot(num) {
+        if (num < 0) return undefined;
+        if (num == 0) return 0;
+        return `${num} cubic root is ${Math.cbrt(num)}.` ;
+    }
+
+    input.addEventListener('change', () => {
+        const num = parseFloat(input.value);
+        if (isNaN(num)) {
+            para.textContent = 'You need to enter a number!';
+        } else if (num < 0) {
+            para.textContent = 'You need to enter a positive number!';
+        } else {
+            const div = document.createElement('div');
+            const data = [squared(num), cubed(num), factorial(num), squaredRoot(num), cubicRoot(num)]
+            data.forEach(number => {
+                const p = document.createElement('p');
+                p.innerText = number;
+                div.appendChild(p);
+            });
+            
+            body.appendChild(div)
+        }
+    });
+
+  </script>
+</body>
+</html>
